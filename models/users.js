@@ -17,7 +17,11 @@ var userSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  createdAt: { 
+    type: Date, 
+    default: Date.now 
+  } 
 });
 
 //store the hash password before each save
