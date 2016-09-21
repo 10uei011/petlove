@@ -1,6 +1,8 @@
 //import the User model.
 var User = require('../models/users.js');
 var user = new User();
+var serverConfig = require('../config/database.js');
+var jwt = require('jwt-simple');
 
 /*
   @summary creates a user 
@@ -57,8 +59,10 @@ exports.login = function (req, res) {
               message: 'Incorrect password.'
             });
           } else if (isMatch) {
+            var token = jwt.encode(result, serverConfig.secret)
             res.status(200).json({
               success: true,
+              token: token,
               message: 'User verified.'
             })
           }  
